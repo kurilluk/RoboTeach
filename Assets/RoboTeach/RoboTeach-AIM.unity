@@ -817,8 +817,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   randomPositions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
+  - {x: 0.5, y: 1.5, z: 0}
+  - {x: 0.7, y: 1.8, z: 0.6}
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -828,6 +828,8 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   acturalTargetIndex: 0
+  possibleIndices: 
+  numberOfLevels: 5
   targetGO: {fileID: 1456095894}
 --- !u!1001 &1575645676
 PrefabInstance:

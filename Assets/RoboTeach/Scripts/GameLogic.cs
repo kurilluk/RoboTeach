@@ -18,6 +18,8 @@ public class GameLogic : MonoBehaviour
         targetManager.ShowScore += DisplayScore;
     }
 
+   
+
     public void DisplayScore()
     {
         StartCoroutine(ShowScoreText());

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using System;
+using Random = System.Random;
 
 public class TargetManager : MonoBehaviour
 {
@@ -12,10 +13,13 @@ public class TargetManager : MonoBehaviour
 
     public Vector3[] randomPositions;
     public int acturalTargetIndex = 0;
+    public List<int> possibleIndices = new List<int>();   //  Declare list
+    public int numberOfLevels = 5;
 
     public GameObject targetGO;
-
     public Action ShowScore;
+
+
 
     private void Awake()
     {
@@ -30,15 +34,19 @@ public class TargetManager : MonoBehaviour
     public void InitializeMe(Vector3[] positions)
     {
         //Debug.Log("Initialized the Target.");
-        //randomPositions = positions;
-        for (int i = 0; i < randomPositions.Length; i++)
+        randomPositions = positions;
+
+        //Instantiate(targetGO, randomPositions[0], Quaternion.identity);
+        //Instantiate(targetGO, randomPositions[1], Quaternion.identity);
+
+        //!!!! Watch out this spawns recursively more targets !!!!!
+        for (int n = 0; n < randomPositions.Length; n++)    //  Populate list
         {
-            float radius = 0.5f;
-            
-            randomPositions[i] = new Vector3(UnityEngine.Random.Range(this.transform.position.x - radius, this.transform.position.x + radius), UnityEngine.Random.Range(this.transform.position.y - radius, this.transform.position.y + radius), UnityEngine.Random.Range(this.transform.position.z - radius, this.transform.position.z + radius));
+            possibleIndices.Add(n);
         }
-        ResetIndex();
-        MoveMe(randomPositions[0]);
+
+        MoveMe(randomPositions[SelectRandom()]);
+        //possibleIndices.RemoveAt(0);
     }
 
     private void ResetIndex()
@@ -95,7 +103,7 @@ public class TargetManager : MonoBehaviour
         //Debug.Log("You've hit the target!");
         TargetHit();
         acturalTargetIndex++;
-        if (acturalTargetIndex >= randomPositions.Length)
+        if (acturalTargetIndex >= numberOfLevels)
         {
             VictoryEvent.Invoke();
             Debug.Log("You've won!");
@@ -103,7 +111,7 @@ public class TargetManager : MonoBehaviour
         }
         else
         {
-            MoveMe(randomPositions[acturalTargetIndex]);
+            MoveMe(randomPositions[SelectRandom()]);
             EnableMe();
 
         }
@@ -125,4 +133,34 @@ public class TargetManager : MonoBehaviour
         }
 
     }
+
+    public int SelectRandom ()
+    {
+        int index = UnityEngine.Random.Range(0, possibleIndices.Count - 1);    //  Pick random element from the list
+        int i = possibleIndices[index];    //  i = the number that was randomly picked
+        possibleIndices.RemoveAt(index);   //  Remove chosen element
+        return i;
+
+    }
+
+
+    //-------------------- Random Shuffle ------------------------
+
+    //public static class ListExtensions
+    //{
+    //    private static readonly Random Random = new Random();
+
+    //    public static void Shuffle<T>(this IList<T> list)
+    //    {
+    //        int n = list.Count;
+    //        while (n > 1)
+    //        {
+    //            n--;
+    //            int k = Random.Next(n + 1);
+    //            T value = list[k];
+    //            list[k] = list[n];
+    //            list[n] = value;
+    //        }
+    //    }
+    //}
 }
