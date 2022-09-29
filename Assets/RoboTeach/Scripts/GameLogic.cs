@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameLogic : MonoBehaviour
 {
-    public Target target;
+    public TargetManager targetManager;
     [SerializeField] public TextMeshProUGUI scoreText;
     [SerializeField] private Canvas canvas;
     public GameObject screenFader;
@@ -15,7 +15,7 @@ public class GameLogic : MonoBehaviour
 
     private void OmEnable()
     {
-        target.ShowScore += DisplayScore;
+        targetManager.ShowScore += DisplayScore;
     }
 
     public void DisplayScore()
@@ -26,8 +26,8 @@ public class GameLogic : MonoBehaviour
     {
         canvas.gameObject.SetActive(true);
         //Debug.Log("The score should be displayed now.");
-        int numberOfTargets = target.levelPositions.Length;
-        int actualTargetIndex = target.acturalTargetIndex + 1;
+        int numberOfTargets = targetManager.randomPositions.Length;
+        int actualTargetIndex = targetManager.acturalTargetIndex + 1;
         if (actualTargetIndex == numberOfTargets){
             scoreText.text = "Congratulations! You won! " + actualTargetIndex + " / " + numberOfTargets;
             ResetGame();
@@ -41,7 +41,7 @@ public class GameLogic : MonoBehaviour
 
     private void OmDisable()
     {
-        target.ShowScore -= DisplayScore;
+        targetManager.ShowScore -= DisplayScore;
     }
 
     // Start is called before the first frame update

@@ -1,0 +1,34 @@
+{
+    "name": "PlayerInputActions",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "b627e7a1-0ef2-49b1-bef1-b048a5e9a7e2",
+            "actions": [
+                {
+                    "name": "Forfeit",
+                    "type": "Button",
+                    "id": "74958e46-9d22-4a5b-be00-1be2a8eec495",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "af5c2f68-4312-4068-8ed2-1fa223d99e83",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Forfeit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
