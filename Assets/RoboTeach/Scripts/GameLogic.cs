@@ -68,6 +68,29 @@ public class GameLogic : MonoBehaviour
         canvas.gameObject.SetActive(false);
         SceneManager.UnloadSceneAsync(1, UnloadSceneOptions.None);
         SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+        yield return null;
+    }
+    IEnumerator ReloadLevelNow()
+    {
+        
+        canvas.gameObject.SetActive(true);
+        scoreText.text = "Reloading the game!";
+        yield return new WaitForSeconds(2f);
+        screenFader.SetActive(true);
+        scoreText.text = "";
+        canvas.gameObject.SetActive(false);
+        SceneManager.UnloadSceneAsync(1, UnloadSceneOptions.None);
+        SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+        yield return null;
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine(ReloadLevelNow());
+        }
+        
     }
 
 }

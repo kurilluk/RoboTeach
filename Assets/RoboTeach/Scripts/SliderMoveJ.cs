@@ -23,7 +23,7 @@ public class SliderMoveJ : MonoBehaviour
     public Slider slider4; // -130 To 130
     public Slider slider5; // -360 To 360
 
-    public void Start()
+    public void Awake()
     {
         slider0.value = robotArm0.rotation.y;
         slider1.value = robotArm1.rotation.z;
@@ -31,6 +31,18 @@ public class SliderMoveJ : MonoBehaviour
         slider3.value = robotArm3.rotation.x;
         slider4.value = robotArm4.rotation.z;
         slider5.value = robotArm5.rotation.x;
+
+        //slider0.value = transform.localEulerAngles.y;
+        //slider1.value = robotArm1.rotation.z;
+        //slider2.value = robotArm2.rotation.z;
+        //slider3.value = robotArm3.rotation.x;
+        //slider4.value = robotArm4.rotation.z;
+        //slider5.value = robotArm5.rotation.x;
+    }
+
+    public void Start()
+    {
+
         //print("Robot arm0 rotation y: " + slider0.value);
         slider0.onValueChanged.AddListener(delegate { CheckSlider0(); });
         slider1.onValueChanged.AddListener(delegate { CheckSlider1(); });
